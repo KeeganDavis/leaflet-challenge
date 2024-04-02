@@ -71,17 +71,20 @@ function createMap(earthquakes) {
     const legend = L.control({position: 'bottomright'});
 
     legend.onAdd = function() {
+        // create the div with a class "legend"
         let div = L.DomUtil.create('div', 'legend');
-        depths = [0, 10, 30, 50, 70, 90];
-        labels = [];
+        // create an array of the depth values to be used for ranges in the legend
+        let depths = [0, 10, 30, 50, 70, 90];
+        // loop through the depth values and generate a label with a colored square for each depth value corresponding to the color markers
         for (let i = 0; i < depths.length; i++) {
             let start = depths[i];
             let end = depths[i + 1];
             div.innerHTML += `<i style="background:${colorForDepth(depths[i] + 1)}"></i><span>${i==0 ? '>' + end : i==depths.length - 1 ? start + '+': start + ' - ' + end}</span><br>`
-            // div.innerHTML += `<i style="background:${colorForDepth(depths[i + 1])}"><span>${i=0 ? start + ' <' : i=depths.length - 1 ? end + '+': start + ' - ' + end}</span></i><br>`;
         };
+        // return the div with the legend from the function
         return div;     
     };
+        // add the legend to the map
        legend.addTo(myMap);
     };
     
