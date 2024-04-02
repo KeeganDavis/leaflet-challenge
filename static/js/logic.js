@@ -66,5 +66,22 @@ function createMap(earthquakes) {
     L.control.layers(baseMaps, overlayMaps, {
         collapsed: false
     }).addTo(myMap);
+
+    // initialize the legend
+    const legend = L.control({position: 'bottomright'});
+
+    legend.onAdd = function() {
+        let div = L.DomUtil.create('div', 'legend');
+        depths = [0, 10, 30, 50, 70, 90];
+        labels = [];
+        for (let i = 0; i < depths.length; i++) {
+            let start = depths[i];
+            let end = depths[i + 1];
+            div.innerHTML += `<i style="background:${colorForDepth(depths[i] + 1)}"></i><span>${i==0 ? '>' + end : i==depths.length - 1 ? start + '+': start + ' - ' + end}</span><br>`
+            // div.innerHTML += `<i style="background:${colorForDepth(depths[i + 1])}"><span>${i=0 ? start + ' <' : i=depths.length - 1 ? end + '+': start + ' - ' + end}</span></i><br>`;
+        };
+        return div;     
+    };
+       legend.addTo(myMap);
+    };
     
-};
