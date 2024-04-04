@@ -21,7 +21,7 @@ d3.json(url).then(data =>{
         onEachFeature: (feature, layer) => {
             // add popup for each element in the features array that includes the place where the earthquake occurred and the magnitude
             layer.bindPopup(
-                `<h2>${feature.properties.place}</h2><hr><h3>Magnitude: ${Math.round(feature.properties.mag * 1000) / 1000}</h3><br><h3>Depth: ${Math.round(feature.geometry.coordinates[2] * 1000) / 1000} km</h3`
+                `<h2>${feature.properties.place}</h2><hr><p>Magnitude: ${Math.round(feature.properties.mag * 1000) / 1000}</p><p>Depth: ${Math.round(feature.geometry.coordinates[2] * 1000) / 1000} km</p>`
                 )
         }
     });
